@@ -1,10 +1,13 @@
 <x-layout>
-    <x-header>
-        <h1 class="text-center">Presto.it</h1>
-    </x-header>
+    <h-header>
+        <h1 class="text-center">I nostri prodotti</h1>
+    </h-header>
     <div class="container">
         <div class="row justify-content-center align-items-center">
-            <div class="col-12 col-md-4">
+            <div class="col-12 col-md-4 my-5">
+                <livewire:filter />
+            </div>
+            <div class="col-12 col-md-4 my-5">
                 @foreach ($articles as $article)
                     <x-card :article="$article" />
                 @endforeach
