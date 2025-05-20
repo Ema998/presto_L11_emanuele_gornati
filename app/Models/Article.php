@@ -8,15 +8,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Article extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'title',
         'description',
-        'user_id',
         'price',
         'category',
+        'user_id',
     ];
 
-    public function create()
+
+    public function createArticle()
     {
         return view('article.create');
     }
