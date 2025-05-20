@@ -27,6 +27,16 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Ciao {{ Auth::user()->name }}</a>
                     </li>
+                    @if (Auth::user()->is_revisor)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('revisor.index') }}">
+                                Dashboard
+                                <span class="badge badge-danger">
+                                    {{ $articlesToCheck->count() }}
+                                </span>
+                            </a>
+                        </li>
+                    @endif
                     <li class="nav-item">
                         <form action="{{ route('logout') }}" method="POST" id="logout" style="display: none;">
                             @csrf
