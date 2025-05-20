@@ -18,11 +18,11 @@
                     <a class="nav-link" href="{{ route('homepage') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('articles.index') }}">I Nostri Articoli</a>
+                    <a class="nav-link" href="{{ route('article.index') }}">I Nostri Articoli</a>
                 </li>
                 @auth
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('articles.create') }}">Crea articolo</a>
+                        <a class="nav-link" href="{{ route('article.create') }}">Crea articolo</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Ciao {{ Auth::user()->name }}</a>
