@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Article;
+use Illuminate\Support\Facades\Auth;
+use App\Mail\BecomeRevisor;
+use Illuminate\Support\Facades\Mail;
+use App\Models\User;
+use Illuminate\Support\Facades\Artisan;
 
 class RevisorController extends Controller
 {
@@ -23,5 +28,17 @@ class RevisorController extends Controller
     {
         $article->setAccepted(false);
         return redirect()->route('revisor.index')->with('success', 'Articolo rifiutato.');
+    }
+
+    public function becomeRevisor()
+    {
+        Mail::to('staff@presto.it')->send(new BecomeRevisor(Auth::user()));
+        return redirect()->route('homepage')->with('message', 'Richiesta inviata; Riceverai una risposta via email.');
+    }
+
+    public function makeRevisor(User $user)
+    {
+        Artisan::call('app:make-user-revisor', ['email' => $user->email]);
+        return redirect()->back();
     }
 }

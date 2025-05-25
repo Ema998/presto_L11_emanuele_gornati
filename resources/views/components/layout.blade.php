@@ -43,6 +43,9 @@
                         </form>
                         <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout').submit();">Logout</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('becomeRevisor')}}">Diventa revisore</a>
+                    </li>
                 @endauth
                 @guest
                     <li class="nav-item">
