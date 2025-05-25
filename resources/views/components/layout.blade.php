@@ -20,6 +20,16 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('article.index') }}">I Nostri Articoli</a>
                 </li>
+                <li class="nav-item">
+                    <form class="d-flex ms-auto" role="search" action="{{route('article.search')}}" method="GET">
+                        <div class="input-group">
+                            <input type="search" class="form-control" name="query" placeholder="Cerca articoli" aria-label="Search">
+                            <button type="submit" class="btn btn-outline-secondary input-group-text" id=""searchButton">
+                                Cerca
+                            </button>
+                        </div>
+                    </form>
+                </li>
                 @auth
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('article.create') }}">Crea articolo</a>
