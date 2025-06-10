@@ -16,6 +16,10 @@ class IsRevisor
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if ($request->is('livewire/*')) {
+            return $next($request);
+        }
+        
         if(Auth::check() && Auth::user()->is_revisor) {
             return $next($request);
         }

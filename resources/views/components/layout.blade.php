@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <title>{{$title ?? 'presto'}}</title>
+    @livewireStyles
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -75,5 +76,7 @@
     <footer class="bg-dark text-white text-center py-3">
         <p>&copy; 2025 Presto.it. All rights reserved.</p>
         <p>Powered by Laravel</p>
+    </footer>
+    @livewireScripts
 </body>
 </html>

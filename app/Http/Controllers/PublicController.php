@@ -9,7 +9,8 @@ class PublicController
 {
     public function homepage()
     {
-        return view('homepage');
+        $articles = Article::where('is_accepted', true)->orderBy('created_at', 'desc')->get();
+        return view('homepage', compact('articles'));
     }
 
     public function searchArticles(Request $request)
