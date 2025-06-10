@@ -10,18 +10,19 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Address;
 
-class Becomerevisor extends Mailable
+class BecomeRevisor extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $user
+    public $user;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($name, $email, $message)
+    public function __construct($user)
     {
         $this->user = $user;
+    }
 
     /**
      * Get the message envelope.

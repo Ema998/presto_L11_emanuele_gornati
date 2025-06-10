@@ -20,7 +20,7 @@
                                 <h3>{{ $articlesToCheck->description }}</h3>
                                 <h3>{{ $articlesToCheck->category->name }}</h3>
                             </div>
-                            <div class="d-flex justify-content-">
+                            <div class="d-flex justify-content-between">
                                 <form action="{{ route('reject', ['article'=>$articlesToCheck]) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
