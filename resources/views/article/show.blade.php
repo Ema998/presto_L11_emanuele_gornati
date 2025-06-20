@@ -12,24 +12,22 @@
                         <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2" aria-label="Slide 3"></button>
                     </div>
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                        <img src="#" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                        <img src="#" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                        <img src="#" class="d-block w-100" alt="...">
-                        </div>
+                        @foreach ($article->image as $key => $image)
+                            <div class="carousel-item active">
+                                <img src="{{ Storage::uri($image->path) }}" class="d-block w-100 rounded shadow">
+                            </div>
+                        @endforeach
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Precedente</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Successivo</span>
-                    </button>
+                    @if($article->image->count() > 1)
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Precedente</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Successivo</span>
+                        </button>
+                    @endif
                 </div>
             </div>
             <div class="col-12 col-md-6 my-4">

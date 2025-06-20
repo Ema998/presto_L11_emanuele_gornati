@@ -8,11 +8,14 @@
             <div class="row justify-content-center align-items-center">
                 <div class="col-12 col-md-6">
                     <div class="row justify-content-center align-items-center">
-                        @for($i=0; $i<5; $i++)
-                            <div class="col-6 col-md-4">
-                                <img src="" alt="image" class="img-fluid">
-                            </div>
-                        @endfor
+                        @if($articlesToCheck->images->count())
+                            @foreach($articlesToCheck->images as $image)
+                                <div class="col-6 col-md-4 mb-4">
+                                    <img src="{{ Storage::uri($image->path) }}" class="img-fluid rounded shadow" alt="{{ $articlesToCheck->title }}">
+                                </div>
+                            @endforeach
+                        @endif
+                    </div>
                         <div class="col-md-4 ps-4 d-flex flex-column justify-content-between">
                             <div>
                                 <h1>{{ $articlesToCheck->title }}</h1>

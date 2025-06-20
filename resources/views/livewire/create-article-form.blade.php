@@ -27,6 +27,22 @@
                         </select>
                         <div> @error('category') {{$message}} @enderror </div>
                     </div>
+                    @if (!empty($images))
+                        <div class="row">
+                            <div class="col-12">
+                                <p>Photo Preview:</p>
+                                <div class="row-border border-4 border-success rounded shadow py-4">
+                                    @foreach($images as $key => $image)
+                                        <div class="col d-flex flex-column align-items-center my-3">
+                                            <div class="image-preview mx-auto shadow rounded" style="background-image: url({{ $image->temporaryUrl() }});">
+                                            </div>
+                                            <button type="button" class="btn mt-1 btn-danger" wiew:click="removeImage({{ $key }})">Rimuovi</button>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                     <button type="submit" class="btn btn-primary">Inserisci</button>
                 </form>
             </div>
