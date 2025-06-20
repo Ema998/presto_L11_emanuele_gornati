@@ -28,4 +28,10 @@ class PublicController
             'query' => $query,
         ]);
     }
+
+    public function setlanguage($lang)
+    {
+        session()->put('locale', $lang);
+        return redirect()->back();
+    }
 }

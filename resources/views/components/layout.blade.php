@@ -66,6 +66,8 @@
                         <a class="nav-link" href="{{ route('register') }}">Registrati</a>
                     </li>
                 @endguest
+                <x_locale lang="it" />
+                <x_locale lang="en" />
             </ul>
         </div>
     </nav>
