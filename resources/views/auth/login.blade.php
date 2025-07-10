@@ -17,6 +17,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Accedi</button>
                 </form>
+                <x-errors :errors="$errors" />
             </div>
         </div>
     </div>

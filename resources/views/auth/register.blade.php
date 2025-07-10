@@ -7,21 +7,22 @@
             <div class="col-12 col-md-6">
                 <form method="POST" action="{{ route('register') }}" class="bg-secondary p-4 rounded">
                     @csrf
+                    <x-errors />
                     <div class="form-group">
-                        <label for="nome">Nome</label>
-                        <input type="text" class="form-control" id="nome" name="email" required>
+                        <label for="name">Nome</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
                     </div>
                     <div class="form-group">
                         <label for="email1">Email</label>
                         <input type="email" class="form-control" id="email1" name="email" required>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
+                        <label for="Password1">Password</label>
                         <input type="password" class="form-control" id="Password1" name="password" required>
                     </div>
                     <div class="form-group">
-                        <label for="checkPassword">Conferma password</label>
-                        <input type="text" class="form-control" id="checkPassword" name="checkPassword" required>
+                        <label for="password_confirmation">Conferma password</label>
+                        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Registrati</button>
                 </form>

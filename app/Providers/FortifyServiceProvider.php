@@ -53,6 +53,6 @@ class FortifyServiceProvider extends ServiceProvider
 
         Fortify::redirects('register', '/article/index');
         Fortify::redirects('login', '/article/index');
-        Fortify::redirects('logout', '/article.index');
+        Fortify::redirects('logout', '/article/index');
     }
 }

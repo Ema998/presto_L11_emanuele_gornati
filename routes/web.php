@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\RevisorController;
+use Laravel\Fortify\Fortify;
 
 Route::get('/', [PublicController::class, 'homepage']) ->name('homepage');
 Route::get('search/article', [PublicController::class, 'searchArticles'])->name('article.search');
