@@ -9,9 +9,9 @@
                 <div class="col-12 col-md-6">
                     <div class="row justify-content-center align-items-center">
                         @if($articlesToCheck->images->count())
-                            @foreach($articlesToCheck->images as $image)
+                            @foreach($articlesToCheck->images as $key => $image)
                                 <div class="col-6 col-md-4 mb-4">
-                                    <img src="{{ Storage::uri($image->path) }}" class="img-fluid rounded shadow" alt="{{ $articlesToCheck->title }}">
+                                    <img src="{{ $image->getUrl(300, 300)}}" class="img-fluid rounded shadow" alt="Immagine {{ $key + 1 }} dell'articolo {{ $article_to_check->title }}">
                                 </div>
                             @endforeach
                         @endif
