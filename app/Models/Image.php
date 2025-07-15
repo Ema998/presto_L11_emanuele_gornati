@@ -14,6 +14,13 @@ class Image extends Model
 
     protected $fillable = ['path',];
 
+    protected function casts(): array
+    {
+        return [
+            'lables' => 'array',
+        ];
+    }
+
     public static function getUrlByFilePath($filePath, $w = null, $h = null)
     {
         if(!$w && !$h){
