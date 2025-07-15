@@ -1,4 +1,5 @@
-    <x-message/>
+<div> 
+    <x-message/> 
     <div class="container-fluid">
         <div class="row justify-content-center align-items-center">
             <div class="col-12 col-md-6">
@@ -14,13 +15,13 @@
                         <div> @error('body') {{$message}} @enderror </div>
                     </div>
                     <div class="form-group">
-                        <label for="titolo">Prezzo</label>
-                        <input wire:model="prezzo" type="text" class="form-control" id="prezzo" required>
+                        <label for="price">Prezzo</label>
+                        <input wire:model="price" type="text" class="form-control" id="price" required>
                         <div> @error('price') {{$message}} @enderror </div>
                     </div>
                     <div class="form-group mb-3">
                         <select id="category" wire:model="category" class="form-control">
-                            <option label disabled>Seleziona una categoria</option>
+                            <option label disabled selected>Seleziona una categoria</option>
                             @foreach($categories as $category)
                                 <option value="{{$category->id}}">{{$category->name}}</option>
                             @endforeach
@@ -36,7 +37,7 @@
                                         <div class="col d-flex flex-column align-items-center my-3">
                                             <div class="image-preview mx-auto shadow rounded" style="background-image: url({{ $image->temporaryUrl() }});">
                                             </div>
-                                            <button type="button" class="btn mt-1 btn-danger" wiew:click="removeImage({{ $key }})">Rimuovi</button>
+                                            <button type="button" class="btn mt-1 btn-danger" wire:click="removeImage({{ $key }})">Rimuovi</button>
                                         </div>
                                     @endforeach
                                 </div>
@@ -48,4 +49,4 @@
             </div>
         </div>
     </div>
-
+</div>
