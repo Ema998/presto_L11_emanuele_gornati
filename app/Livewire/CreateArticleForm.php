@@ -79,13 +79,13 @@ class CreateArticleForm extends Component
 
     public function render()
     {
-        return view('livewire.create-form-article');
+        return view('livewire.create-article-form');
     }
 
     public function updatetemporaryImages()
     {
         if($this->validate([
-            'temporary_images.*' => 'image|max:1024', // 1MB Max
+            'temporary_images.*' => 'image|max:1024',
             'temporary_images' => 'max:6'
         ])) {
             foreach ($this->temporary_images as $image) {
