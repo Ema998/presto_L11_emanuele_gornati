@@ -23,7 +23,7 @@
                 </li>
                 <li class="nav-item">
                     <form class="d-flex ms-auto" role="search" action="{{route('article.search')}}" method="GET">
-                        <div class="input-group">
+                        <div class="input-group w-25">
                             <input type="search" class="form-control ml-2" name="query" placeholder="Cerca articoli" aria-label="Search">
                             <button type="submit" class="btn btn-outline-secondary input-group-text mr-2" id="searchButton">
                                 Cerca

@@ -13,18 +13,18 @@
                         <input type="text" class="form-control" id="name" name="name" required>
                     </div>
                     <div class="form-group">
-                        <label for="email1">Email</label>
+                        <label for="email1" class="mt-2">Email</label>
                         <input type="email" class="form-control" id="email1" name="email" required>
                     </div>
                     <div class="form-group">
-                        <label for="Password1">Password</label>
+                        <label for="Password1" class="mt-2">Password</label>
                         <input type="password" class="form-control" id="Password1" name="password" required>
                     </div>
                     <div class="form-group">
-                        <label for="password_confirmation">Conferma password</label>
+                        <label for="password_confirmation" class="mt-2">Conferma password</label>
                         <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Registrati</button>
+                    <button type="submit" class="btn btn-primary mt-3">Registrati</button>
                 </form>
             </div>
         </div>
