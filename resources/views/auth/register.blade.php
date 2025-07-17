@@ -4,7 +4,7 @@
     </x-header>
     <div class="container">
         <div class="row justify-content-center align-items-center">
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-6 py-5">
                 <form method="POST" action="{{ route('register') }}" class="bg-secondary p-4 rounded">
                     @csrf
                     <x-errors />

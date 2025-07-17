@@ -7,10 +7,10 @@
     <title>{{$title ?? 'presto'}}</title>
     @livewireStyles
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="{{ route('homepage') }}">Presto.it</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -24,8 +24,8 @@
                 <li class="nav-item">
                     <form class="d-flex ms-auto" role="search" action="{{route('article.search')}}" method="GET">
                         <div class="input-group">
-                            <input type="search" class="form-control" name="query" placeholder="Cerca articoli" aria-label="Search">
-                            <button type="submit" class="btn btn-outline-secondary input-group-text" id=""searchButton">
+                            <input type="search" class="form-control ml-2" name="query" placeholder="Cerca articoli" aria-label="Search">
+                            <button type="submit" class="btn btn-outline-secondary input-group-text mr-2" id="searchButton">
                                 Cerca
                             </button>
                         </div>
@@ -34,9 +34,6 @@
                 @auth
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('article.create') }}">Crea articolo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Ciao {{ Auth::user()->name }}</a>
                     </li>
                     @if (Auth::user()->is_revisor)
                         <li class="nav-item">
@@ -48,6 +45,13 @@
                             </a>
                         </li>
                     @endif
+                @endauth
+            </ul>
+            <ul class="navbar-nav ms-auto">
+                @auth
+                     <li class="nav-item">
+                        <a class="nav-link" href="#">Ciao {{ Auth::user()->name }}</a>
+                    </li>
                     <li class="nav-item">
                         <form action="{{ route('logout') }}" method="POST" id="logout" style="display: none;">
                             @csrf
@@ -71,11 +75,10 @@
             </ul>
         </div>
     </nav>
-    
-    {{ $slot }}
-
-
-    <footer class="bg-dark text-white text-center py-3">
+    <main class="flex-grow-1 container py-5">
+        {{ $slot }}
+    </main>
+    <footer class="bg-dark text-white text-center py-3 mt-auto">
         <p>&copy; 2025 Presto.it. All rights reserved.</p>
         <p>Powered by Laravel</p>
     </footer>

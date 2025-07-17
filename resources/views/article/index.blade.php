@@ -5,7 +5,7 @@
     <x-message />
     <div class="container">
         <div class="row justify-content-center align-items-center">
-            <div class="col-12 col-md-4 my-5">
+            <div class="col-12 col-md-4 my-5 w-100">
                 <livewire:filter />
             </div>
             <div class="col-12 col-md-4 my-5">

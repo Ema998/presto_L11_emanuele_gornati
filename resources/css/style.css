@@ -5,3 +5,8 @@
     width: 120%;
     height: 120%;
 }
+
+li{
+    margin-left: 5px;
+    margin-right: 5px;
+}
