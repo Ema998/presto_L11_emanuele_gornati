@@ -23,7 +23,7 @@
                 </li>
                 <li class="nav-item">
                     <form class="d-flex ms-auto" role="search" action="{{route('article.search')}}" method="GET">
-                        <div class="input-group w-25">
+                        <div class="input-group w-100">
                             <input type="search" class="form-control ml-2" name="query" placeholder="Cerca articoli" aria-label="Search">
                             <button type="submit" class="btn btn-outline-secondary input-group-text mr-2" id="searchButton">
                                 Cerca
@@ -75,7 +75,7 @@
             </ul>
         </div>
     </nav>
-    <main class="flex-grow-1 container py-5">
+    <main class="flex-grow-1 container-fluid py-5">
         {{ $slot }}
     </main>
     <footer class="bg-dark text-white text-center py-3 mt-auto">
