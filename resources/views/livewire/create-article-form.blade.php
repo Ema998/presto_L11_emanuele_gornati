@@ -28,6 +28,15 @@
                         </select>
                         <div> @error('category') {{$message}} @enderror </div>
                     </div>
+                    <div class="form-group mb-3">
+                        <input type="file" wire:model.live="temporary_images" multiple class="form-control shadow @error('temporary_images.*') is-invalid @enderror">
+                        @error('temporary_images.*')
+                           <p class="fst-italic text-danger">{{$message}}</p>
+                        @enderror
+                        @error('temporary_images')
+                            <p class="fst-italic text-danger">{{$message}}</p>
+                        @enderror
+                    </div>
                     @if (!empty($images))
                         <div class="row">
                             <div class="col-12">
