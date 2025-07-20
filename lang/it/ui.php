@@ -23,4 +23,16 @@ return
         'showCategory' => 'Categoria',
 
         'loginTitle' => 'Login',
+        'loginEmanil' => 'Email',
+        'loginPassword' => 'Password',
+        'loginSubmit' => 'Accedi',
+
+        'registerTitle' => 'Registrati',
+        'registerName' => 'Nome',
+        'registerEmail' => 'Email',
+        'registerPassword' => 'Password',
+        'registerPasswordConfirm' => 'Conferma Password',
+        'registerSubmit' => 'Registrati',
+
+        'cardMessage' => 'Scopri di più',
     ];
