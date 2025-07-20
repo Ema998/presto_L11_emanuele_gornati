@@ -12,13 +12,13 @@
                         <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2" aria-label="Slide 3"></button>
                     </div>
                     <div class="carousel-inner">
-                        @foreach ($article->image as $key => $image)
+                        @foreach ($article->images as $key => $image)
                             <div class="carousel-item active">
                                 <img src="{{ $image->getUrl(300, 300) }}" class="d-block w-100 rounded shadow">
                             </div>
                         @endforeach
                     </div>
-                    @if($article->image->count() > 1)
+                    @if($article->images->count() > 1)
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Precedente</span>
@@ -27,8 +27,10 @@
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Successivo</span>
                         </button>
-                    @endif
                 </div>
+                @else 
+                    <h5 class="text-ceneter">Non sono presenti foto</h5>
+                @endif
             </div>
             <div class="col-12 col-md-6 my-4">
                 <h3 class="text-center">{{$article->title}}</h3>

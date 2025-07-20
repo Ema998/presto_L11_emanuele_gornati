@@ -12,7 +12,7 @@ class MakeRevisor extends Command
      *
      * @var string
      */
-    protected $signature = 'app:make-revisor {id}';
+    protected $signature = 'app:make-revisor {email}';
 
     /**
      * The console command description.
@@ -26,7 +26,7 @@ class MakeRevisor extends Command
      */
     public function handle()
     {
-        $user = User::where('id', $this->argument('id'))->first();
+        $user = User::where('email', $this->argument('email'))->first();
         if ($user) {
             $user->is_revisor = true;
             $user->save();

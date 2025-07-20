@@ -13,9 +13,10 @@ Route::post('/lingua/{lang}', [PublicController::class, 'setLanguage'])->name('s
 Route::get('/article/create', [ArticleController::class, 'createArticle'])->name('article.create')->middleware('auth');
 Route::get('/article/index', [ArticleController::class, 'index'])->name('article.index');
 Route::get('/show/article/{article}', [ArticleController::class, 'show'])->name('article.show');
+Route::get('/category/{category}', [ArticleController::class, 'byCategory'])->name('byCategory');
 
 Route::get('revisor/index', [RevisorController::class, 'index'])->name('revisor.index')->middleware('isRevisor');
 Route::patch('/accept/{article}', [RevisorController::class, 'accept'])->name('accept');
 Route::patch('/reject/{article}', [RevisorController::class, 'reject'])->name('reject');
 Route::get('/revisor/request', [RevisorController::class, 'becomeRevisor'])->name('becomeRevisor')->middleware('auth');
-Route::get('/makeRevisor/{user}', [RevisorController::class, 'makeRevisor'])->name('makeRevisor');
+Route::get('/make/revisor/{user}', [RevisorController::class, 'makeRevisor'])->name('makeRevisor');

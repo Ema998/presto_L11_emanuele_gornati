@@ -22,7 +22,7 @@ class Filter extends Component
     {
         if ($this->selectedCategories) {
             return collect($this->articles)->filter(function ($article) {
-                return in_array($article->category, $this->selectedCategories);
+                return in_array($article->category->name, $this->selectedCategories);
             });
         }
 

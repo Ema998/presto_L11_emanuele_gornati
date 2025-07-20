@@ -16,7 +16,7 @@ class Article extends Model
         'title',
         'description',
         'price',
-        'category',
+        'category_id',
         'user_id',
     ];
 
@@ -43,7 +43,7 @@ class Article extends Model
         return true;
     }
 
-    public function articlesToCheckCount()
+    public static function articlesToCheckCount()
     {
         return Article::where('is_accepted', null)->count();
     }

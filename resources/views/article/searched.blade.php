@@ -2,7 +2,6 @@
     <h-header>
         <h1 class="text-center">Risultati della ricerca</h1>
     </h-header>
-    <x-message />
     <x-errors />
     <div class="container-fluid">
         <div class="row p-5 justify-content-center align-items-center">

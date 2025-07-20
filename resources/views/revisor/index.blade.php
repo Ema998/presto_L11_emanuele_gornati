@@ -2,7 +2,6 @@
     <x-header>
         <h1 class="text-center">Dashboard</h1>
     </x-header>
-    <x-message />
     <div class="container">
         @if($articlesToCheck)
             <div class="row justify-content-center align-items-center">
@@ -105,5 +104,6 @@
                     </h3>
                 </div>
             </div>
+        @endif
     </div>
 </x-layout>

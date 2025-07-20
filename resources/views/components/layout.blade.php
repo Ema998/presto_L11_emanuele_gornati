@@ -31,6 +31,23 @@
                         </div>
                     </form>
                 </li>
+                <li class="nav-item-dropdown">
+                    <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" class="nav-link dropdown-toggle">
+                        Categorie
+                    </a>
+                    <ul class="dropdown-menu">
+                        @foreach ($categories as $category)
+                            <li>
+                                <a href="{{route('byCategory', ['category' => $category]) }}" class="dropdown-item">
+                                    {{ $category->name }}
+                                </a>
+                            </li>
+                            @if ($loop->last)
+                                <hr class="dropdown-divider">
+                            @endif
+                        @endforeach
+                    </ul>
+                </li>
                 @auth
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('article.create') }}">Crea articolo</a>
@@ -40,7 +57,7 @@
                             <a class="nav-link" href="{{ route('revisor.index') }}">
                                 Dashboard
                                 <span class="badge badge-danger">
-                                    {{ $articlesToCheck->count() }}
+                                    {{ \App\Models\Article::articlesToCheckCount() }}
                                 </span>
                             </a>
                         </li>
@@ -70,12 +87,13 @@
                         <a class="nav-link" href="{{ route('register') }}">Registrati</a>
                     </li>
                 @endguest
-                <x_locale lang="it" />
-                <x_locale lang="en" />
+                <x-_locale lang="it" />
+                <x-_locale lang="en" />
             </ul>
         </div>
     </nav>
     <main class="flex-grow-1 container-fluid py-5">
+        <x-message></x-message>
         {{ $slot }}
     </main>
     <footer class="bg-dark text-white text-center py-3 mt-auto">

@@ -12,15 +12,20 @@ use Illuminate\Support\Facades\File;
 use App\Jobs\GoogleVisionSafeSearch;
 use App\Jobs\GoogleVisionLabelImage;
 use App\Jobs\RemoveFaces;
+use App\Models\Category;
 
 
 class CreateArticleForm extends Component
 {
     use WithFileUploads;
 
-    public $image = [];
+    public $images = [];
 
-    public $temporary_images;
+    public $temporary_images = [];
+
+    public $article;
+
+    public $categories = [];
 
     #[Validate('required|string|max:255', message: 'Il titolo  è obbligatorio')]
     public $title;
@@ -31,10 +36,14 @@ class CreateArticleForm extends Component
     #[Validate('required|numeric|min:0', message: 'Il prezzo è obbligatorio')]
     public $price;
 
-    #[Validate('required|category', message: 'La categoria è obbligatoria')]
+    #[Validate('required|exists:categories,id', message: 'La categoria è obbligatoria')]
     public $category;
 
-    public $article;
+
+    public function mount()
+    {
+        $this->categories = Category::all();
+    }
 
     public function cleanForm()
         {
@@ -42,11 +51,13 @@ class CreateArticleForm extends Component
             $this->description = '';
             $this->price = '';
             $this->category = '';
-            $this->image = [];
+            $this->images = [];
+            $this->temporary_images = [];
         }
     public function store()
     {
         $this->validate();
+
         $this->article = Article::create([
                         'title' => $this->title,
                         'description' => $this->description,
@@ -55,7 +66,7 @@ class CreateArticleForm extends Component
                         'user_id' => Auth::id(),
         ]);
 
-        if(count($this->image) > 0) {
+        if(count($this->images) > 0) {
             foreach ($this->images as $image) {
                 $newFileName = "articles/{$this->article->id}";
                 $newImage = $this->article->images()->create([
@@ -70,34 +81,39 @@ class CreateArticleForm extends Component
                     new GoogleVisionLabelImage($newImage->id)
                 ])->dispatch($newImage->id);
             }
+
             File::deleteDirectory(storage_path('app/livewire-tmp/'));
         }
 
         session()->flash('message', 'Article created successfully.');
+        return redirect()->route('homepage');
         $this->cleanForm();
     }
 
     public function render()
     {
-        return view('livewire.create-article-form');
+        return view('livewire.create-article-form', [
+            'categories' => $this->categories,
+        ]);
     }
 
-    public function updatetemporaryImages()
+    public function updateTemporaryImages()
     {
-        if($this->validate([
+        $this->validate([
             'temporary_images.*' => 'image|max:1024',
             'temporary_images' => 'max:6'
-        ])) {
-            foreach ($this->temporary_images as $image) {
-                $this->image[] = $image;
-            }
+        ]);
+
+        foreach ($this->temporary_images as $image) {
+            $this->images[] = $image;
         }
     }
 
     public function removeImage($key)
     {
-        if(in_array($key, array_keys($this->image))) {
-            unset($this->image[$key]);
+        if(in_array($key, array_keys($this->images))) {
+            unset($this->images[$key]);
+            $this->images = array_values($this->images);
         }
     }
 }

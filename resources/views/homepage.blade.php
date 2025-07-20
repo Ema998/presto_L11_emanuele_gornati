@@ -5,11 +5,17 @@
     <x-errors />
     <div class="container">
         <div class="row justify-content-center align-items-center">
-            <div class="col-12 col-md-4">
-                @foreach ($articles as $article)
+            @forelse ($articles as $article)
+                <div class="col-12 col-md-3">
                     <x-card :article="$article" />
-                @endforeach
-            </div>
+                </div>
+            @empty
+                <div class="col-12">
+                    <h5 class="text-center">
+                        Nessun articolo da mostrare
+                    </h5>
+                </div>
+            @endforelse
         </div>
     </div>
 </x-layout>
