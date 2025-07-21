@@ -6,14 +6,17 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use App\Models\Image;
 use Google\Cloud\Vision\V1\ImageAnnotatorClient;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Bus\Dispatchable;
 
 class GoogleVisionSafeSearch implements ShouldQueue
 {
-    use Queueable, Dispatchable, interactsWithQueue, SerializesModels;
+    use Queueable, Dispatchable, InteractsWithQueue, SerializesModels;
 
     private $article_image_id;
 
-    public function __construct()
+    public function __construct($article_image_id)
     {
         $this->article_image_id = $article_image_id;
     }
@@ -31,7 +34,7 @@ class GoogleVisionSafeSearch implements ShouldQueue
         $image = file_get_contents(storage_path('app/public/' . $i->path));
         putenv('GOOGLE_APPLICATION_CREDENTIALS=' . base_path('google-vision.json'));
 
-        $imageAnnotator = new imageAnnotatorClient();
+        $imageAnnotator = new ImageAnnotatorClient();
         $response = $imageAnnotator->safeSearchDetection($image);
         $imageAnnotator->close();
 
@@ -52,11 +55,11 @@ class GoogleVisionSafeSearch implements ShouldQueue
             'text-danger bi bi-x-circle-fill',
         ];
 
-        $i->adult = $likehoodName[$adult];
-        $i->spoof = $likehoodName[$spoof];
-        $i->medical = $likehoodName[$medical];
-        $i->violence = $likehoodName[$violence];
-        $i->racy = $likehoodName[$racy];
+        $i->adult = $likelihoodName[$adult];
+        $i->spoof = $likelihoodName[$spoof];
+        $i->medical = $likelihoodName[$medical];
+        $i->violence = $likelihoodName[$violence];
+        $i->racy = $likelihoodName[$racy];
 
         $i->save();
     }

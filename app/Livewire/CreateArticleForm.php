@@ -86,8 +86,8 @@ class CreateArticleForm extends Component
         }
 
         session()->flash('message', 'Article created successfully.');
-        return redirect()->route('homepage');
         $this->cleanForm();
+        return redirect()->route('homepage');
     }
 
     public function render()
@@ -97,16 +97,14 @@ class CreateArticleForm extends Component
         ]);
     }
 
-    public function updateTemporaryImages()
+    public function updatedTemporaryImages()
     {
         $this->validate([
             'temporary_images.*' => 'image|max:1024',
             'temporary_images' => 'max:6'
         ]);
 
-        foreach ($this->temporary_images as $image) {
-            $this->images[] = $image;
-        }
+        $this->images = $this->temporary_images;
     }
 
     public function removeImage($key)
@@ -114,6 +112,11 @@ class CreateArticleForm extends Component
         if(in_array($key, array_keys($this->images))) {
             unset($this->images[$key]);
             $this->images = array_values($this->images);
+        }
+
+        if(in_array($key, array_keys($this->temporary_images))) {
+            unset($this->temporary_images[$key]);
+            $this->temporary_images = array_values($this->temporary_images);
         }
     }
 }

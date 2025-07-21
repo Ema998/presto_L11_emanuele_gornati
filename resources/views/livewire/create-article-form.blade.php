@@ -19,6 +19,7 @@
                         <div> @error('price') {{$message}} @enderror </div>
                     </div>
                     <div class="form-group mb-3 mt-3">
+                        <label for="category">Scegli una categoria</label>
                         <select id="category" wire:model.blur="category" class="form-control">
                             <option label disabled selected>Seleziona una categoria</option>
                             @foreach($categories as $category)
@@ -28,7 +29,8 @@
                         <div> @error('category') {{$message}} @enderror </div>
                     </div>
                     <div class="form-group mb-3">
-                        <input type="file" wire:model.blur="temporary_images" multiple class="form-control shadow @error('temporary_images.*') is-invalid @enderror">
+                        <label for="temporary_images">Inserisci una o più immagini</label>
+                        <input type="file" wire:model="temporary_images" multiple class="form-control shadow @error('temporary_images.*') is-invalid @enderror">
                         @error('temporary_images.*')
                            <p class="fst-italic text-danger">{{$message}}</p>
                         @enderror

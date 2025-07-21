@@ -9,6 +9,10 @@ use Google\Cloud\Vision\V1\ImageAnnotatorClient;
 use Spatie\Image\Enums\Fit;
 use Spatie\Image\Enums\AlignPosition;
 use Spatie\Image\Image as SpatieImage;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+
 
 class RemoveFaces implements ShouldQueue
 {
@@ -16,7 +20,7 @@ class RemoveFaces implements ShouldQueue
 
     private $article_image_id;
 
-    public function __construct()
+    public function __construct($article_image_id)
     {
         $this->article_image_id = $article_image_id;
     }
@@ -34,8 +38,8 @@ class RemoveFaces implements ShouldQueue
         putenv('GOOGLE_APPLICATION_CREDENTIALS=' . base_path('app/google-vision.json'));
 
         $imageAnnotator = new ImageAnnotatorClient();
-        $reponse = $imageAnnotator->labelDetection($image);
-        $labels = $reponse->getLabelAnnotations();
+        $response = $imageAnnotator->faceDetection($imageContent);
+        $labels = $response->getFaceAnnotations();
 
         foreach ($faces as $face){
             $vertices = $face->getBoundingPoly()->getVertices();
