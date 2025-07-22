@@ -40,7 +40,7 @@
                 <p>Anteprima Immagini:</p>
                 <div class="d-flex flex-wrap gap-3">
                     @foreach ($images as $index => $image)
-                        <div class="text-center">
+                        <div class="text-center mb-5">
                             <div class="image-preview mb-2" style="background-image: url('{{ $image->temporaryUrl() }}')"></div>
                             <button type="button" class="btn btn-sm btn-danger" wire:click="removeImage({{ $index }})">Rimuovi</button>
                         </div>
