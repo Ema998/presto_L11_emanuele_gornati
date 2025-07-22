@@ -12,7 +12,7 @@ use Illuminate\Bus\Dispatchable;
 
 class GoogleVisionSafeSearch implements ShouldQueue
 {
-    use Queueable, Dispatchable, InteractsWithQueue, SerializesModels;
+    use Queueable;
 
     private $article_image_id;
 

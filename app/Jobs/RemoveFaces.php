@@ -16,7 +16,7 @@ use Illuminate\Queue\SerializesModels;
 
 class RemoveFaces implements ShouldQueue
 {
-    use Queueable, Dispatchable, InteractsWithQueue, SerializesModels;
+    use Queueable;
 
     private $article_image_id;
 
@@ -38,10 +38,10 @@ class RemoveFaces implements ShouldQueue
         putenv('GOOGLE_APPLICATION_CREDENTIALS=' . base_path('app/google-vision.json'));
 
         $imageAnnotator = new ImageAnnotatorClient();
-        $response = $imageAnnotator->faceDetection($imageContent);
+        $response = $imageAnnotator->faceDetection($image);
         $labels = $response->getFaceAnnotations();
 
-        foreach ($faces as $face){
+        foreach ($labels as $face){
             $vertices = $face->getBoundingPoly()->getVertices();
 
             $bounds = [];
