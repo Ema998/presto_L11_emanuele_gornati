@@ -4,7 +4,7 @@ namespace App\Jobs;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
-use Spatie\Image\CropPosition;
+use Spatie\Image\Enums\CropPosition;
 use Spatie\Image\Image;
 use Spatie\Image\Enums\Unit;
 

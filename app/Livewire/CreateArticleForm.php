@@ -66,7 +66,7 @@ class CreateArticleForm extends Component
 
         foreach ($this->images as $image) {
             $path = $image->store("articles/{$article->id}", 'public');
-
+            \Log::debug('Stored image path: ' . $path);
             $article->images()->create([
                 'path' => $path,
             ]);
