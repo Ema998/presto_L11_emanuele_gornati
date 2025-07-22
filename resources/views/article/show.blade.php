@@ -7,9 +7,11 @@
             <div class="col-12 col-md-6 mt-4">
                 <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        @if($article->images->count() > 0)
+                            @foreach($article->images as $key => $image)
+                                <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="{{ $key }}" class="{{ $key === 0 ? 'active' : '' }}" aria-current="{{ $key === 0 ? 'true' : 'false' }}" aria-label="Slide {{ $key + 1 }}"></button>
+                            @endforeach
+                        @endif
                     </div>
                     <div class="carousel-inner">
                         @foreach ($article->images as $key => $image)
@@ -27,8 +29,9 @@
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Successivo</span>
                         </button>
+                    @endif
                 </div>
-                @else 
+                @if($article->images->isEmpty())
                     <h5 class="text-ceneter">Non sono presenti foto</h5>
                 @endif
             </div>

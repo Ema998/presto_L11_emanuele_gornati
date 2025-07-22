@@ -49,6 +49,6 @@
             </div>
         @endif
 
-        <button type="submit" class="btn btn-primary mt-5">Pubblica articolo</button>
+        <button type="submit" class="btn btn-primary">Pubblica articolo</button>
     </form>
 </div>

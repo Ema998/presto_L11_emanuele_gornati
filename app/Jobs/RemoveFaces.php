@@ -39,9 +39,9 @@ class RemoveFaces implements ShouldQueue
 
         $imageAnnotator = new ImageAnnotatorClient();
         $response = $imageAnnotator->faceDetection($image);
-        $labels = $response->getFaceAnnotations();
+        $faces = $response->getFaceAnnotations();
 
-        foreach ($labels as $face){
+        foreach ($faces as $face){
             $vertices = $face->getBoundingPoly()->getVertices();
 
             $bounds = [];
