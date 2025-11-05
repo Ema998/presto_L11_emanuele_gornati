@@ -78,8 +78,8 @@ class CreateArticleForm extends Component
 
         if(count($this->images) > 0) {
             foreach ($this->images as $image) {
-                $newFileName = "articles/{$this->article->id}";
-                $newImage = $this->article->images()->create([
+                $newFileName = "articles/{$article->id}";
+                $newImage = $article->images()->create([
                     'path' => $image->store($newFileName, 'public'),
                 ]);
                 RemoveFaces::withChain([
