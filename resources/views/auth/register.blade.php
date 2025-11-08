@@ -1,31 +1,43 @@
 <x-layout>
     <x-header>
-        <h1 class="text-center">Registrati</h1>
+        <span class="pill-badge">
+            <i class="bi bi-person-plus"></i>
+            {{ __('ui.hero.auth_register.badge') }}
+        </span>
+        <h1 class="hero-title mt-3">{{ __('ui.hero.auth_register.title') }}</h1>
+        <p class="hero-subtitle">{{ __('ui.hero.auth_register.subtitle') }}</p>
     </x-header>
-    <div class="container">
-        <div class="row justify-content-center align-items-center">
-            <div class="col-12 col-md-6 py-5">
-                <form method="POST" action="{{ route('register') }}" class="bg-secondary p-4 rounded">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+                <form method="POST" action="{{ route('register') }}" class="glass-panel">
                     @csrf
-                    <x-errors />
-                    <div class="form-group">
-                        <label for="name">Nome</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label fw-semibold">{{ __('ui.form.name') }}</label>
+                        <input type="text" class="form-control" id="name" name="name" required autofocus>
                     </div>
-                    <div class="form-group">
-                        <label for="email1" class="mt-2">Email</label>
-                        <input type="email" class="form-control" id="email1" name="email" required>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label fw-semibold">{{ __('ui.form.email') }}</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="{{ __('ui.form.email_placeholder') }}" required>
                     </div>
-                    <div class="form-group">
-                        <label for="Password1" class="mt-2">Password</label>
-                        <input type="password" class="form-control" id="Password1" name="password" required>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label fw-semibold">{{ __('ui.form.password') }}</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="{{ __('ui.form.password_placeholder') }}" required>
                     </div>
-                    <div class="form-group">
-                        <label for="password_confirmation" class="mt-2">Conferma password</label>
+
+                    <div class="mb-3">
+                        <label for="password_confirmation" class="form-label fw-semibold">{{ __('ui.form.password_confirmation') }}</label>
                         <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
                     </div>
-                    <button type="submit" class="btn btn-primary mt-3">Registrati</button>
+
+                    <button type="submit" class="btn btn-gradient w-100">{{ __('ui.auth.register_button') }}</button>
                 </form>
+                <div class="mt-3">
+                    <x-errors />
+                </div>
             </div>
         </div>
     </div>

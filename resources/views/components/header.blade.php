@@ -1,7 +1,11 @@
-<header class="container-fluid py-5">
-        <div class="row align-items-center justify-content-center vh-75">
-            <div class="col-12 col-md-6">
-                {{ $slot }}
+<header class="hero-section">
+    <div class="container position-relative">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10">
+                <div class="hero-content">
+                    {{ $slot }}
+                </div>
             </div>
         </div>
-    </header>
+    </div>
+</header>

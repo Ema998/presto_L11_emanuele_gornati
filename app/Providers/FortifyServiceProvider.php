@@ -47,12 +47,12 @@ class FortifyServiceProvider extends ServiceProvider
             return view('auth.register');
         });
 
-        Fortify::loginview(function () {
+        Fortify::loginView(function () {
             return view('auth.login');
         });
 
-        Fortify::redirects('register', '/article/index');
-        Fortify::redirects('login', '/article/index');
-        Fortify::redirects('logout', '/article/index');
+        Fortify::redirects('register', '/homepage');
+        Fortify::redirects('login', '/homepage');
+        Fortify::redirects('logout', '/homepage');
     }
 }

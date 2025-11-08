@@ -8,97 +8,100 @@
     @livewireStyles
 </head>
 <body class="d-flex flex-column min-vh-100">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="{{ route('homepage') }}">Presto.it</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('homepage') }}">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('article.index') }}">I Nostri Articoli</a>
-                </li>
-                <li class="nav-item">
-                    <form class="d-flex ms-auto" role="search" action="{{route('article.search')}}" method="GET">
-                        <div class="input-group w-100">
-                            <input type="search" class="form-control ml-2" name="query" placeholder="Cerca articoli" aria-label="Search">
-                            <button type="submit" class="btn btn-outline-secondary input-group-text mr-2" id="searchButton">
-                                Cerca
-                            </button>
-                        </div>
-                    </form>
-                </li>
-                <li class="nav-item-dropdown">
-                    <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" class="nav-link dropdown-toggle">
-                        Categorie
-                    </a>
-                    <ul class="dropdown-menu">
-                        @foreach ($categories as $category)
-                            <li>
-                                <a href="{{route('byCategory', ['category' => $category]) }}" class="dropdown-item">
-                                    {{ $category->name }}
+    <nav class="navbar navbar-expand-lg custom-navbar sticky-top py-3">
+        <div class="container">
+            <a class="navbar-brand" href="{{ route('homepage') }}" style="color: white;">Presto.it</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" style="background-color: white;">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav me-auto align-items-lg-center gap-lg-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('homepage') }}">{{ __('ui.navbar.home') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="white-space: nowrap;" href="{{ route('article.index') }}">{{ __('ui.navbar.articles') }}</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" class="nav-link dropdown-toggle">
+                            {{ __('ui.navbar.categories') }}
+                        </a>
+                        <ul class="dropdown-menu shadow border-0 rounded-4 p-2">
+                            @foreach ($categories as $category)
+                                <li>
+                                    <a href="{{route('byCategory', ['category' => $category]) }}" class="dropdown-item rounded-3">
+                                        {{ $category->name }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
+                    @auth
+                        <li class="nav-item">
+                            <a class="nav-link" style="white-space: nowrap; margin-right: 20px;" href="{{ route('article.create') }}">{{ __('ui.navbar.create') }}</a>
+                        </li>
+                        @if (Auth::user()->is_revisor)
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center" style="white-space: nowrap;" href="{{ route('revisor.index') }}">
+                                    {{ __('ui.navbar.dashboard') }}
+                                    <span class="badge rounded-pill bg-danger ms-2">
+                                        {{ \App\Models\Article::articlesToCheckCount() }}
+                                    </span>
                                 </a>
                             </li>
-                            @if ($loop->last)
-                                <hr class="dropdown-divider">
-                            @endif
-                        @endforeach
-                    </ul>
-                </li>
-                @auth
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('article.create') }}">Crea articolo</a>
-                    </li>
-                    @if (Auth::user()->is_revisor)
+                        @endif
+                    @endauth
+                </ul>
+
+                <form class="search-bar input-group my-3 my-lg-0" role="search" action="{{route('article.search')}}" method="GET">
+                    <input type="search" class="form-control shadow-none" name="query" placeholder="{{ __('ui.navbar.search_placeholder') }}" aria-label="{{ __('ui.navbar.search') }}">
+                    <button type="submit" class="btn btn-gradient">{{ __('ui.navbar.search') }}</button>
+                </form>
+
+                <ul class="navbar-nav ms-lg-4 align-items-lg-center gap-lg-3">
+                    @auth
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('revisor.index') }}">
-                                Dashboard
-                                <span class="badge badge-danger">
-                                    {{ \App\Models\Article::articlesToCheckCount() }}
-                                </span>
-                            </a>
+                            <a class="nav-link" style="white-space: nowrap;" href="#">{{ __('ui.navbar.greeting', ['name' => Auth::user()->name]) }}</a>
                         </li>
-                    @endif
-                @endauth
-            </ul>
-            <ul class="navbar-nav ms-auto">
-                @auth
-                     <li class="nav-item">
-                        <a class="nav-link" href="#">Ciao {{ Auth::user()->name }}</a>
+                        <li class="nav-item">
+                            <form action="{{ route('logout') }}" method="POST" id="logout" class="d-none">
+                                @csrf
+                            </form>
+                            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout').submit();">{{ __('ui.navbar.logout') }}</a>
+                        </li>
+                        @if (!Auth::user()->is_revisor)
+                            <li class="nav-item">
+                                <a class="nav-link" style="white-space: nowrap;" href="{{route('becomeRevisor')}}">{{ __('ui.navbar.become_revisor') }}</a>
+                            </li>
+                        @endif
+                    @endauth
+                    @guest
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('ui.navbar.login') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('ui.navbar.register') }}</a>
+                        </li>
+                    @endguest
+                    <li class="nav-item d-flex align-items-center gap-2">
+                        <x-_locale lang="it" />
+                        <x-_locale lang="en" />
                     </li>
-                    <li class="nav-item">
-                        <form action="{{ route('logout') }}" method="POST" id="logout" style="display: none;">
-                            @csrf
-                        </form>
-                        <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout').submit();">Logout</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('becomeRevisor')}}">Diventa revisore</a>
-                    </li>
-                @endauth
-                @guest
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Accedi</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">Registrati</a>
-                    </li>
-                @endguest
-                <x-_locale lang="it" />
-                <x-_locale lang="en" />
-            </ul>
+                </ul>
+            </div>
         </div>
     </nav>
-    <main class="flex-grow-1 container-fluid py-5">
-        <x-message></x-message>
+    <main class="flex-grow-1 py-5">
+        <div class="container">
+            <x-message></x-message>
+        </div>
         {{ $slot }}
     </main>
-    <footer class="bg-dark text-white text-center py-3 mt-auto">
-        <p>&copy; 2025 Presto.it. All rights reserved.</p>
-        <p>Powered by Laravel</p>
+    <footer class="footer text-center py-4 mt-auto">
+        <div class="container small">
+            <p class="mb-1">{{ __('ui.footer.line1', ['year' => now()->year]) }}</p>
+            <p class="mb-0">{{ __('ui.footer.line2') }}</p>
+        </div>
     </footer>
     @livewireScripts
 </body>

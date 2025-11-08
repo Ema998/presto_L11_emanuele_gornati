@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Category;
 
@@ -32,8 +31,6 @@ class DatabaseSeeder extends Seeder
                 'name' => $category,
             ]);
         }
-
-        // User::factory(10)->create();
 
         User::factory()->create([
             'name' => 'Test User',

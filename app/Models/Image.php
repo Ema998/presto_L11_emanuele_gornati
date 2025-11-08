@@ -17,7 +17,7 @@ class Image extends Model
     protected function casts(): array
     {
         return [
-            'lables' => 'array',
+            'labels' => 'array',
         ];
     }
 

@@ -23,6 +23,6 @@ class IsRevisor
         if(Auth::check() && Auth::user()->is_revisor) {
             return $next($request);
         }
-        return redirect()->route('homepage')->with('error', 'Accesso negato.');
+        return redirect()->route('homepage')->with('error', __('ui.alerts.access_denied'));
     }
 }

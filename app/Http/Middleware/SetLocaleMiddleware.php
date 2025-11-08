@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\App;
+use Carbon\Carbon;
 
 class SetLocaleMiddleware
 {
@@ -18,6 +19,7 @@ class SetLocaleMiddleware
     {
         $localelanguage = session('locale', 'it');
         App::setLocale($localelanguage);
+        Carbon::setLocale($localelanguage);
         return $next($request);
     }
 }

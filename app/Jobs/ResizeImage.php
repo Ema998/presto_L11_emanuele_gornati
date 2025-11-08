@@ -5,6 +5,7 @@ namespace App\Jobs;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Spatie\Image\Enums\CropPosition;
+use Illuminate\Support\Facades\Log;
 use Spatie\Image\Image;
 use Spatie\Image\Enums\Unit;
 
@@ -22,20 +23,17 @@ class ResizeImage implements ShouldQueue
         $this->h = $h;
     }
 
-    /**
-     * Execute the job.
-     */
     public function handle(): void
     {
         $w = $this->w;
         $h = $this->h;
-        $srcPath = storage_path() . '/app/public/' . $this->path . '/' . $this->fileName;
-        $destPath = storage_path() . '/app/public/' . $this->path . "/crop_{$w}x{$h}_" . $this->fileName;
+        $srcPath = storage_path('app/public/' . $this->path . '/' . $this->fileName);
+        $destPath = storage_path('app/public/' . $this->path . "/crop_{$w}x{$h}_" . $this->fileName);
 
         Image::load($srcPath)
             ->crop($w, $h, CropPosition::Center)
             ->watermark(
-                base_path('resources/img/watermark.png'),
+                public_path('img/watermark.png'),
                 width: 50,
                 height: 50,
                 paddingX: 5,

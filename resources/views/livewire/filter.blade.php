@@ -1,6 +1,6 @@
 <div class="container my-4 p-4 border rounded shadow-sm bg-light">
     <div class="row mb-3">
-        <label for="categoryFilter" class="form-label fw-bold">Filtra per categoria</label>
+        <label for="categoryFilter" class="form-label fw-bold">{{ __('ui.filter.title') }}</label>
         <select 
             id="categoryFilter"
             wire:model="selectedCategories" 
@@ -10,7 +10,7 @@
             style="min-height: 200px;"
             aria-describedby="categoryHelp"
         >
-            <option value="all" class="fw-bold">— Tutte le categorie —</option>
+            <option value="all" class="fw-bold">{{ __('ui.filter.all') }}</option>
             @foreach($categories as $category)
                 <option value="{{ $category->name }}">{{ $category->name }}</option>
             @endforeach
@@ -25,7 +25,7 @@
         @empty
             <div class="col-12">
                 <div class="alert alert-warning text-center" role="alert">
-                    Nessun articolo trovato per la categoria selezionata.
+                    {{ __('ui.filter.empty') }}
                 </div>
             </div>
         @endforelse

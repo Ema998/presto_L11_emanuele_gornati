@@ -67,15 +67,6 @@ class CreateArticleForm extends Component
             'user_id' => Auth::id(),
         ]);
 
-        /*foreach ($this->images as $image) {
-            $path = $image->store("articles/{$article->id}", 'public');
-            $article->images()->create([
-                'path' => $path,
-            ]);
-
-            ResizeImage::dispatch($path, 300, 300);
-        }*/
-
         if(count($this->images) > 0) {
             foreach ($this->images as $image) {
                 $newFileName = "articles/{$article->id}";
@@ -92,7 +83,7 @@ class CreateArticleForm extends Component
             File::deleteDirectory(storage_path('app/livewire-tmp/'));
         }
 
-        session()->flash('message', 'Articolo creato con successo!');
+        session()->flash('message', __('ui.alerts.success'));
         return redirect()->route('homepage');
     }
 

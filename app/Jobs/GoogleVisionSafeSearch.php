@@ -8,11 +8,11 @@ use App\Models\Image;
 use Google\Cloud\Vision\V1\ImageAnnotatorClient;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Bus\Dispatchable;
+use Illuminate\Foundation\Bus\Dispatchable;
 
 class GoogleVisionSafeSearch implements ShouldQueue
 {
-    use Queueable;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     private $article_image_id;
 
@@ -32,9 +32,10 @@ class GoogleVisionSafeSearch implements ShouldQueue
         }
 
         $image = file_get_contents(storage_path('app/public/' . $i->path));
-        putenv('GOOGLE_APPLICATION_CREDENTIALS=' . base_path('google-vision.json'));
 
-        $imageAnnotator = new ImageAnnotatorClient();
+        $imageAnnotator = new ImageAnnotatorClient([
+            'credentials' => base_path('google-credential.json')
+        ]);
         $response = $imageAnnotator->safeSearchDetection($image);
         $imageAnnotator->close();
 

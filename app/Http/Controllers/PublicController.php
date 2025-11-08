@@ -31,7 +31,7 @@ class PublicController
             ]);
     }
 
-    public function setlanguage($lang)
+    public function setLanguage($lang)
     {
         session()->put('locale', $lang);
         return redirect()->back();

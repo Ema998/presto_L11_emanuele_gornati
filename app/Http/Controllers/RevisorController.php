@@ -21,24 +21,24 @@ class RevisorController extends Controller
     public function accept(Article $article)
     {
         $article->setAccepted(true);
-        return redirect()->route('revisor.index')->with('success', 'Articolo accettato.');
+        return redirect()->route('revisor.index')->with('success', __('ui.alerts.revisor_accepted'));
     }
 
     public function reject(Article $article)
     {
         $article->setAccepted(false);
-        return redirect()->route('revisor.index')->with('success', 'Articolo rifiutato.');
+        return redirect()->route('revisor.index')->with('success', __('ui.alerts.revisor_rejected'));
     }
 
     public function becomeRevisor()
     {
         Mail::to('staff@presto.it')->send(new BecomeRevisor(Auth::user()));
-        return redirect()->route('homepage')->with('message', 'Richiesta inviata; Riceverai una risposta via email.');
+        return redirect()->route('homepage')->with('message', __('ui.alerts.revisor_request_sent'));
     }
 
     public function makeRevisor(User $user)
     {
-        Artisan::call('app:make-user-revisor', ['email' => $user->email]);
+        Artisan::call('app:make-revisor', ['email' => $user->email]);
         return redirect()->back();
     }
 }

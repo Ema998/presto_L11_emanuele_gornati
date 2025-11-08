@@ -16,12 +16,12 @@ use Illuminate\Queue\SerializesModels;
 
 class RemoveFaces implements ShouldQueue
 {
-    use Queueable;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     private $article_image_id;
 
     public function __construct($article_image_id)
-    {
+    { 
         $this->article_image_id = $article_image_id;
     }
 
@@ -33,12 +33,12 @@ class RemoveFaces implements ShouldQueue
         }
 
         $srcPath = storage_path('app/public/' . $i->path);
-        $image = file_get_contents($srcPath);
+        $imageContent = file_get_contents($srcPath);
 
-        putenv('GOOGLE_APPLICATION_CREDENTIALS=' . base_path('app/google-vision.json'));
-
-        $imageAnnotator = new ImageAnnotatorClient();
-        $response = $imageAnnotator->faceDetection($image);
+        $imageAnnotator = new ImageAnnotatorClient([
+            'credentials' => base_path('google-credential.json')
+        ]);
+        $response = $imageAnnotator->faceDetection($imageContent);
         $faces = $response->getFaceAnnotations();
 
         foreach ($faces as $face){
